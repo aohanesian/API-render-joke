@@ -1,7 +1,8 @@
 const select = document.querySelector('#jokesCategories');
 const ul = document.querySelector(`#jokesList`);
+const API = `https://api.chucknorris.io/jokes`
 
-fetch('https://api.chucknorris.io/jokes/categories')
+fetch(API+'/categories')
     .then(data => data.ok ? data.json() : Promise.reject(data.statusText))
     .then(data => data.forEach(item => {
         let option = document.createElement(`option`);
@@ -12,7 +13,7 @@ fetch('https://api.chucknorris.io/jokes/categories')
     .catch(err => console.log(`In catch: ${err}.`));
 
 select.addEventListener(`change`, evt => {
-    fetch(`https://api.chucknorris.io/jokes/random?category=${select.value}`)
+    fetch(API+`/random?category=${select.value}`)
         .then(data => data.ok ? data.json() : Promise.reject(data.statusText))
         .then(data => {
             let li = document.createElement(`li`);
